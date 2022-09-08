@@ -24,6 +24,10 @@ func main() {
 	if *i {
 		prompt.New(
 			func(s string) {
+				if s == "" {
+					return
+				}
+
 				g, err := patterns.NewGenerator(s, r)
 				if err != nil {
 					log.Println(err)
