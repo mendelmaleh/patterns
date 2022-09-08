@@ -21,9 +21,9 @@ func Parse(s string) (pattern []Token, err error) {
 		case '?':
 			last.SetQuantifier(Quantifier{Max: 1})
 		case '*':
-			last.SetQuantifier(Quantifier{})
+			last.SetQuantifier(Quantifier{Max: -1})
 		case '+':
-			last.SetQuantifier(Quantifier{Min: 1})
+			last.SetQuantifier(Quantifier{Min: 1, Max: -1})
 		case '{':
 			var digits []byte
 			min := -1

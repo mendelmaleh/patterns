@@ -18,8 +18,8 @@ type Token interface {
 	String() string
 	SetQuantifier(q Quantifier)
 
-	// Quantity returns the value from the quantifier
-	Quantity(r *rand.Rand) int
+	// Quantity returns the value from the quantifier, max is the upper limit for quantifiers without one
+	Quantity(max int, r *rand.Rand) int
 
 	// Value for the token, not quantified
 	Value(r *rand.Rand) string
@@ -42,18 +42,20 @@ type Quantifier struct {
 }
 
 // Quantity resolves the quantifier and implements the Token.Quantity interface
-func (q Quantifier) Quantity(r *rand.Rand) int {
+func (q Quantifier) Quantity(max int, r *rand.Rand) int {
+	switch {
 	// default value
-	if q == (Quantifier{}) {
+	case q == (Quantifier{}):
 		return 1
-	}
-
 	// no range
-	if q.Min == q.Max {
+	case q.Min == q.Max:
 		return q.Min
+	case q.Max == -1:
+		q.Max = max
+		fallthrough
+	default:
+		return q.Min + r.Intn(q.Max-q.Min)
 	}
-
-	return q.Min + r.Intn(1+q.Max-q.Min)
 }
 
 // TokenLiteral represents a literal character
