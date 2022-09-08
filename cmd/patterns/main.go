@@ -7,8 +7,8 @@ import (
 	"math/rand"
 	"time"
 
+	"git.sr.ht/~mendelmaleh/go-prompt"
 	"git.sr.ht/~mendelmaleh/patterns"
-	"github.com/c-bata/go-prompt"
 	"github.com/kr/pretty"
 )
 
