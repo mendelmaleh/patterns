@@ -1,4 +1,4 @@
-RUN ?= go run cmd/pattern/main.go
+RUN ?= go run cmd/patterns/main.go
 
 examples:
 	$(RUN) -x 10 '[-+]?[0-9]{1,16}[.][0-9]{1,6}'
@@ -8,4 +8,4 @@ examples:
 	$(RUN) '[a-f-]{5}'
 
 install:
-	go install ./cmd/pattern
+	go install ./cmd/patterns
