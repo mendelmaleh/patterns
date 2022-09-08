@@ -54,7 +54,7 @@ func (q Quantifier) Quantity(max int, r *rand.Rand) int {
 		q.Max = max
 		fallthrough
 	default:
-		return q.Min + r.Intn(q.Max-q.Min)
+		return q.Min + r.Intn(1+q.Max-q.Min)
 	}
 }
 

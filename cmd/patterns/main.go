@@ -14,9 +14,10 @@ import (
 
 func main() {
 	// flags
-	x := flag.Int("x", 3, "number of strings to generate")
-	i := flag.Bool("i", false, "interactive mode")
 	d := flag.Bool("d", false, "debug mode")
+	i := flag.Bool("i", false, "interactive mode")
+	l := flag.Int("l", 128, "upper limit for quantifiers like * and +")
+	x := flag.Int("x", 3, "number of strings to generate")
 	flag.Parse()
 
 	r := rand.New(rand.NewSource(time.Now().UnixNano()))
@@ -34,6 +35,7 @@ func main() {
 					return
 				}
 
+				g.Max = *l
 				fmt.Println(g.Generate())
 			},
 			func(_ prompt.Document) (s []prompt.Suggest) { return },
@@ -53,6 +55,7 @@ func main() {
 			pretty.Println(g.Tokens)
 		}
 
+		g.Max = *l
 		for i := 0; i < *x; i++ {
 			fmt.Println(g.Generate())
 		}

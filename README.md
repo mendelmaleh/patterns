@@ -7,17 +7,25 @@ String generator from a regex-like pattern.
 ## usage
 
 ```bash
-$ go install git.sr.ht/~mendelmaleh/patterns/cmd/patterns@latest
+$ GOPROXY=direct go install git.sr.ht/~mendelmaleh/patterns/cmd/patterns@latest
 $ patterns -h
 Usage of patterns:
   -d	debug mode
   -i	interactive mode
+  -l int
+    	upper limit for quantifiers like * and + (default 128)
   -x int
     	number of strings to generate (default 3)
+```
+
+```
 $ patterns '0x[0-9a-f]{8}'
 0x1e47bc0c
 0x6abafc21
 0x274e8542
+$ patterns -i
+> [a-z0-9@#$]{12}
+6wa$l#dmrba$
 ```
 
 ## 0xdeadbeef
